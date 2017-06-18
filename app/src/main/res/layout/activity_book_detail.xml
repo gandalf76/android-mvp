@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.text.Html"/>
+        <variable
+            name="bookdetail"
+            type="alex.com.mybooks.view.BookBinder" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="alex.com.mybooks.BookDetailActivity">
+
+            <ImageView
+                android:id="@+id/ivCover"
+                android:layout_width="72dp"
+                android:layout_height="109dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginStart="@dimen/normal_margin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/normal_margin" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:ellipsize="end"
+                app:layout_constraintHorizontal_weight="1"
+                android:text="@{bookdetail.title}"
+                android:layout_marginRight="@dimen/normal_margin"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ivCover"
+                android:layout_marginLeft="@dimen/normal_margin"
+                app:layout_constraintTop_toTopOf="@+id/ivCover"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:layout_marginEnd="@dimen/normal_margin" />
+
+            <TextView
+                android:id="@+id/tvAuthor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{bookdetail.authors}"
+                android:layout_marginTop="@dimen/normal_margin"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                app:layout_constraintLeft_toRightOf="@+id/ivCover"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:layout_marginEnd="@dimen/normal_margin" />
+
+            <View
+                android:id="@+id/vDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="@dimen/normal_margin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="@dimen/normal_margin"
+                app:layout_constraintTop_toBottomOf="@+id/ivCover"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:layout_marginEnd="@dimen/normal_margin" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{bookdetail.description}"
+                android:maxLines="5"
+                android:ellipsize="end"
+                app:layout_constraintTop_toBottomOf="@+id/vDivider"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="@dimen/normal_margin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginStart="@dimen/normal_margin"
+                android:layout_marginEnd="@dimen/normal_margin" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

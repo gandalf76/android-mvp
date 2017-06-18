@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "alex.com.mybooks"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String", "API_BASE_PATH", "\"https://www.googleapis.com/books/v1\""
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/rxjava.properties'
+
+        pickFirst 'lib/x86/libWVphoneAPI.so'
+        pickFirst 'lib/mips/libWVphoneAPI.so'
+        pickFirst 'lib/armeabi/libWVphoneAPI.so'
+    }
+
+}
+
+ext {
+    supportLibraryVersion = '26.0.0-beta1'
+    volleyVersion = '1.0.0'
+    constraintLayoutVersion = '1.0.2'
+    daggerVersion = '2.9'
+    glideVersion = '4.0.0-RC0'
+    apacheCommonsVersion = '3.4'
+    jsrApiVersion = '1.0'
+    jUnitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    powermockVersion = '1.6.4'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    compile "com.android.support:support-v4:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    compile "com.android.volley:volley:$volleyVersion"
+    compile 'com.fasterxml.jackson.core:jackson-core:2.8.7'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.7'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile "org.apache.commons:commons-lang3:$apacheCommonsVersion"
+    compile "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+    compile "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided "javax.annotation:jsr250-api:$jsrApiVersion"
+
+    testCompile "junit:junit:jUnitVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "org.powermock:powermock-module-junit4:$powermockVersion"
+    testCompile "org.powermock:powermock-module-junit4-rule:$powermockVersion"
+    testCompile "org.powermock:powermock-api-mockito:$powermockVersion"
+    testCompile "org.powermock:powermock-classloading-xstream:$powermockVersion"
+}
