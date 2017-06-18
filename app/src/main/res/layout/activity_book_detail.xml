@@ -71,7 +71,8 @@
                 android:layout_marginLeft="@dimen/normal_margin"
                 app:layout_constraintTop_toTopOf="@+id/ivCover"
                 android:layout_marginStart="@dimen/normal_margin"
-                android:layout_marginEnd="@dimen/normal_margin" />
+                android:layout_marginEnd="@dimen/normal_margin"
+                style="@style/TextAppearance.AppCompat.Title"/>
 
             <TextView
                 android:id="@+id/tvAuthor"
@@ -86,7 +87,8 @@
                 android:layout_marginRight="@dimen/normal_margin"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginStart="@dimen/normal_margin"
-                android:layout_marginEnd="@dimen/normal_margin" />
+                android:layout_marginEnd="@dimen/normal_margin"
+                style="@style/TextAppearance.AppCompat.Body1"/>
 
             <View
                 android:id="@+id/vDivider"
@@ -116,7 +118,8 @@
                 android:layout_marginLeft="@dimen/normal_margin"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginStart="@dimen/normal_margin"
-                android:layout_marginEnd="@dimen/normal_margin" />
+                android:layout_marginEnd="@dimen/normal_margin"
+                style="@style/TextAppearance.AppCompat.Body1"/>
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.NestedScrollView>
