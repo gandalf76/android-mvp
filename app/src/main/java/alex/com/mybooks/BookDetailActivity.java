@@ -46,12 +46,10 @@ public class BookDetailActivity extends AppCompatActivity implements BookContrac
 
         setTitle("");
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle(getString(R.string.app_name));
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        this.binding.collapsingToolbar.setTitleEnabled(true);
-        this.binding.collapsingToolbar.setTitle(getString(R.string.app_name));
+        this.binding.collapsingToolbar.setTitleEnabled(false);
 
         String bookId = getIntent().getStringExtra(ARG_BOOK_ID);
 
@@ -79,6 +77,9 @@ public class BookDetailActivity extends AppCompatActivity implements BookContrac
     @Override
     public void showBook(Book book) {
         Log.d(BookDetailActivity.class.getName(), "Show book with id : " + book.getId());
+
+        getSupportActionBar().setTitle(book.getBookInfo().getTitle());
+
         BookBinder bookBinder = new BookBinder();
         bookBinder.setTitle(book.getBookInfo().getTitle());
         bookBinder.setAuthors(book.getBookInfo().getAuthors());

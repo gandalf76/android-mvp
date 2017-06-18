@@ -56,8 +56,7 @@ public class MainActivity extends AppCompatActivity implements BooksContract.Vie
         getSupportActionBar().setTitle(getString(R.string.app_name));
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        this.binding.collapsingToolbar.setTitleEnabled(true);
-        this.binding.collapsingToolbar.setTitle("My Title");
+        this.binding.collapsingToolbar.setTitleEnabled(false);
 
         this.binding.rvBooks.setHasFixedSize(true);
         this.binding.rvBooks.setLayoutManager(new LinearLayoutManager(this));
