@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import alex.com.mybooks.R;
 import alex.com.mybooks.databinding.BookItemBinding;
 import alex.com.mybooks.model.Book;
 import alex.com.mybooks.view.BookBinder;
@@ -68,9 +69,9 @@ public class BookAdapter extends AbstractRecyclerViewScrollingAdapter<Book> {
 
             String priceLabel;
             if (book.getSaleInfo().getListPrice() != null) {
-                priceLabel = String.format("%s%s", book.getSaleInfo().getListPrice().getCurrencyCode(), book.getSaleInfo().getListPrice().getAmount());
+                priceLabel = String.format("%s %s", book.getSaleInfo().getListPrice().getCurrencyCode(), book.getSaleInfo().getListPrice().getAmount());
             } else {
-                priceLabel = "Not for sale";
+                priceLabel = bookItemBinding.getRoot().getContext().getString(R.string.not_for_sale);
             }
 
             bookBinder.setPrice(priceLabel);
