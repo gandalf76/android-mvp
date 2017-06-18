@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -35,7 +36,6 @@ android {
         pickFirst 'lib/mips/libWVphoneAPI.so'
         pickFirst 'lib/armeabi/libWVphoneAPI.so'
     }
-
 }
 
 ext {
@@ -50,6 +50,7 @@ ext {
     mockitoVersion = '1.10.19'
     powermockVersion = '1.6.4'
     gsonVersion = '2.8.0'
+    multidexVersion = '1.0.1'
 }
 
 dependencies {
@@ -71,6 +72,7 @@ dependencies {
     compile "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     provided "javax.annotation:jsr250-api:$jsrApiVersion"
+    compile "com.android.support:multidex:$multidexVersion"
 
     testCompile "junit:junit:$jUnitVersion"
     testCompile "org.mockito:mockito-core:$mockitoVersion"
