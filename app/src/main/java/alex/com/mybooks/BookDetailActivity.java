@@ -1,11 +1,15 @@
 package alex.com.mybooks;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +31,8 @@ public class BookDetailActivity extends AppCompatActivity implements BookContrac
     public static String ARG_BOOK_ID = "bookId";
 
     private ActivityBookDetailBinding binding;
+
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Inject
     BookPresenter bookPresenter;
@@ -51,6 +57,25 @@ public class BookDetailActivity extends AppCompatActivity implements BookContrac
 
         this.binding.collapsingToolbar.setTitleEnabled(false);
 
+        this.bottomSheetBehavior = BottomSheetBehavior.from(this.binding.bottomSheet);
+        this.bottomSheetBehavior.setHideable(true);
+        this.bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        this.bottomSheetBehavior.setPeekHeight(this.getScreenSize().y);
+        this.binding.bsToolbar.setTitle("");
+        this.binding.ivCloseBottomSheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        });
+
+        this.binding.btnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+
         String bookId = getIntent().getStringExtra(ARG_BOOK_ID);
 
         this.bookPresenter.start();
@@ -72,6 +97,15 @@ public class BookDetailActivity extends AppCompatActivity implements BookContrac
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+            super.onBackPressed();
+        } else {
+            this.bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        }
     }
 
     @Override
@@ -98,5 +132,15 @@ public class BookDetailActivity extends AppCompatActivity implements BookContrac
     public void showError(String error) {
         Log.e(BookDetailActivity.class.getName(), error);
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
+    private Point getScreenSize() {
+        Point screenSize = new Point();
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        screenSize.x = displaymetrics.widthPixels;
+        screenSize.y = displaymetrics.heightPixels;
+
+        return screenSize;
     }
 }
