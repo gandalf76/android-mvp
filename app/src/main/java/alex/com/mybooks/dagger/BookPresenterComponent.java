@@ -3,7 +3,6 @@ package alex.com.mybooks.dagger;
 import javax.inject.Singleton;
 
 import alex.com.mybooks.BookDetailActivity;
-import alex.com.mybooks.MainActivity;
 import dagger.Component;
 
 @Singleton

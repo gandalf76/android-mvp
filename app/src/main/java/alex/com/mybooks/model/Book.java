@@ -1,7 +1,7 @@
 package alex.com.mybooks.model;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ public class Book {
 
     private String id;
 
-    @JsonProperty("volumeInfo")
+    @SerializedName("volumeInfo")
     private BookInfo bookInfo;
 
-    @JsonProperty("saleInfo")
+    @SerializedName("saleInfo")
     private SaleInfo saleInfo;
 
     public String getId() {
@@ -43,7 +43,7 @@ public class Book {
 
         private String title;
 
-        @JsonProperty("imageLinks")
+        @SerializedName("imageLinks")
         private Image image;
 
         private List<String> authors;

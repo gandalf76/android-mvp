@@ -1,15 +1,11 @@
 package alex.com.mybooks.httpapi.volley;
 
 
-import android.content.Context;
-
 import com.android.volley.Response;
-import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.util.List;
+import java.lang.reflect.Type;
 
 import alex.com.mybooks.httpapi.UriBuilder;
-import alex.com.mybooks.model.Book;
 import alex.com.mybooks.model.BookApiObject;
 
 public class GetVolleyBooksRequest extends AbstractVolleyRequest<BookApiObject> {
@@ -40,7 +36,7 @@ public class GetVolleyBooksRequest extends AbstractVolleyRequest<BookApiObject> 
     }
 
     @Override
-    protected TypeReference getResponseType() {
-        return new TypeReference<BookApiObject>() {};
+    protected Type getResponseType() {
+        return BookApiObject.class;
     }
 }

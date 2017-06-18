@@ -10,10 +10,9 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
+import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
 
 public abstract class AbstractVolleyRequest<ResponseType> extends Request<ResponseType> {
 
@@ -27,13 +26,9 @@ public abstract class AbstractVolleyRequest<ResponseType> extends Request<Respon
     @Override
     protected Response<ResponseType> parseNetworkResponse(NetworkResponse networkResponse) {
         Log.d(AbstractVolleyRequest.class.getName(), "Response received.");
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         try {
 
-            TypeReference typeReference = getResponseType();
-            ObjectReader objectReader = objectMapper.readerFor(typeReference);
             Cache.Entry entry = HttpHeaderParser.parseCacheHeaders(networkResponse);
             String json = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
 
@@ -43,8 +38,10 @@ public abstract class AbstractVolleyRequest<ResponseType> extends Request<Respon
             Log.d(AbstractVolleyRequest.class.getName(), builder.toString());
 
             ResponseType response = null;
+
             if (!TextUtils.isEmpty(json)) {
-                response = objectReader.readValue(json);
+                Gson gson = new Gson();
+                response = gson.fromJson(json, getResponseType());
             }
             return Response.success(response, entry);
 
@@ -55,16 +52,12 @@ public abstract class AbstractVolleyRequest<ResponseType> extends Request<Respon
         }
     }
 
-    public String getBodyContentType() {
-        return "application/json; charset=utf-8";
-    }
-
     @Override
     protected void deliverResponse(ResponseType response) {
         Log.d(AbstractVolleyRequest.class.getName(), "Response delivered.");
         this.resultListener.onResponse(response);
     }
 
-    protected abstract TypeReference getResponseType();
+    protected abstract Type getResponseType();
 
 }

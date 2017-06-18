@@ -3,8 +3,6 @@ package alex.com.mybooks.presenter;
 
 import android.util.Log;
 
-import java.util.Collections;
-
 import javax.inject.Inject;
 
 import alex.com.mybooks.httpapi.BooksHttpInteractor;

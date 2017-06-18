@@ -19,9 +19,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import alex.com.mybooks.httpapi.BooksHttpInteractor;
 import alex.com.mybooks.httpapi.UriBuilder;
 import alex.com.mybooks.model.Book;
@@ -29,7 +26,6 @@ import alex.com.mybooks.model.BookApiObject;
 import alex.com.mybooks.model.Price;
 import alex.com.mybooks.presenter.BookContract;
 import alex.com.mybooks.presenter.BookPresenter;
-import alex.com.mybooks.presenter.BooksPresenter;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Log.class, Uri.class, Uri.Builder.class})

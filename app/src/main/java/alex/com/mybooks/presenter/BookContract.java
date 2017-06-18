@@ -1,7 +1,5 @@
 package alex.com.mybooks.presenter;
 
-import java.util.List;
-
 import alex.com.mybooks.model.Book;
 
 public interface BookContract {

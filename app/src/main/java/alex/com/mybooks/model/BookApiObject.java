@@ -1,7 +1,7 @@
 package alex.com.mybooks.model;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class BookApiObject {
 
     private int totalItems;
 
-    @JsonProperty("items")
+    @SerializedName("items")
     private List<Book> books;
 
     public int getTotalItems() {

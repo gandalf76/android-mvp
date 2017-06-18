@@ -1,8 +1,8 @@
 package alex.com.mybooks;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,8 +17,6 @@ import alex.com.mybooks.dagger.BookPresenterModule;
 import alex.com.mybooks.dagger.DaggerBookPresenterComponent;
 import alex.com.mybooks.dagger.ServiceModule;
 import alex.com.mybooks.databinding.ActivityBookDetailBinding;
-import alex.com.mybooks.httpapi.BooksHttpInteractor;
-import alex.com.mybooks.httpapi.volley.VolleyBooksHttpInteractor;
 import alex.com.mybooks.model.Book;
 import alex.com.mybooks.presenter.BookContract;
 import alex.com.mybooks.presenter.BookPresenter;
@@ -85,7 +83,8 @@ public class BookDetailActivity extends AppCompatActivity implements BookContrac
         bookBinder.setTitle(book.getBookInfo().getTitle());
         bookBinder.setAuthors(book.getBookInfo().getAuthors());
         String description = book.getBookInfo().getDescription();
-        bookBinder.setDescription(Html.escapeHtml(description));
+        String formatDescription = Html.fromHtml(description).toString();
+        bookBinder.setDescription(formatDescription);
         this.binding.setBookdetail(bookBinder);
 
         Glide.with(getApplicationContext())
